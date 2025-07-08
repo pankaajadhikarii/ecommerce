@@ -1,7 +1,8 @@
-import 'package:ecommerce/screens/details_page.dart';
+import 'package:ecommerce/screens/cart_screen.dart';
 import 'package:ecommerce/screens/dummy_screen.dart';
 import 'package:ecommerce/screens/home_page.dart';
 import 'package:ecommerce/screens/profile_screen.dart';
+import 'package:ecommerce/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -15,9 +16,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _currentIndex = 0;
   List<Widget> _pages = [
     HomePage(),
-    DetailsPage(),
-    DummyScreen(),
-    ProfileScreen(),
+    SearchScreen(),
+    CartScreen(),
+    ProfileScreen()
   ];
   void _stateChange(value) {
     if (value >= 0 && value < _pages.length) {

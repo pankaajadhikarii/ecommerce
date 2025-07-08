@@ -1,10 +1,13 @@
+import 'package:ecommerce/provider/product_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductLists extends StatelessWidget {
   const ProductLists({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProductProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -37,6 +40,7 @@ class ProductLists extends StatelessWidget {
               SizedBox(
                 height: 900,
                 child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.zero,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -44,7 +48,7 @@ class ProductLists extends StatelessWidget {
                     crossAxisSpacing: 15,
                     childAspectRatio: 0.9,
                   ),
-                  itemCount: 8,
+                  itemCount: provider.products.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -66,7 +70,7 @@ class ProductLists extends StatelessWidget {
                                     topRight: Radius.circular(10),
                                   ),
                                   image: DecorationImage(
-                                    image: AssetImage("assets/person.jpg"),
+                                    image: NetworkImage(provider.products[index].imageUrl),
                                     fit: BoxFit.fitWidth,
                                   ),
                                 ),
@@ -102,14 +106,14 @@ class ProductLists extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Watch",
+                                                provider.products[index].title,
                                                 style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                               Text(
-                                                "\$40",
+                                                provider.products[index].price.toString(),
                                                 style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold,

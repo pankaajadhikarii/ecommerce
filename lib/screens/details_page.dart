@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
-
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({super.key});
+  final String title;
+  final double price;
+  final String imageUrl;
+  final String description;
+  const DetailsPage({
+    super.key,
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +30,28 @@ class DetailsPage extends StatelessWidget {
                   bottomRight: Radius.circular(10),
                 ),
                 image: DecorationImage(
-                  image: AssetImage("assets/shoe.jpg"),
+                  image: NetworkImage(imageUrl),
                   fit: BoxFit.fill,
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 35),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 35,
+                ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CircleAvatar(
-                      radius: 25,
-                      backgroundColor: Color(0xffD3D0D0),
-                      child: Icon(Icons.arrow_back, color: Color(0xff000000)),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Color(0xffD3D0D0),
+                        child: Icon(Icons.arrow_back, color: Color(0xff000000)),
+                      ),
                     ),
                     CircleAvatar(
                       radius: 25,
@@ -55,7 +72,7 @@ class DetailsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Nike Shoes",
+                        title,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -91,7 +108,7 @@ class DetailsPage extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    "\$430",
+                    price.toString(),
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -113,7 +130,7 @@ class DetailsPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                "Culpa aliquam consequuntur veritatis at consequuntur praesentium beatae temporibus nobis. Velit dolorem facilis neque autem. Itaque voluptatem expedita qui eveniet id veritatis eaque. Blanditiis quia placeat nemo. Nobis laudantium nesciunt perspiciatis sit eligendi.",
+                description,
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -199,7 +216,10 @@ class DetailsPage extends StatelessWidget {
                         width: 48,
                         decoration: BoxDecoration(
                           color: Color(0xffFFFFFF),
-                          border: Border.all(color: Color(0xffCFCDCD), width: 2),
+                          border: Border.all(
+                            color: Color(0xffCFCDCD),
+                            width: 2,
+                          ),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
@@ -255,11 +275,14 @@ class DetailsPage extends StatelessWidget {
                     width: 93,
                     decoration: BoxDecoration(
                       color: Color(0xffF8F7F7),
-                      borderRadius: BorderRadius.circular(50)
+                      borderRadius: BorderRadius.circular(50),
                     ),
-                    child: Icon(Icons.shopping_bag_rounded, size: 25, color: Color(0xff9E9E9E),),
-                  )
-        
+                    child: Icon(
+                      Icons.shopping_bag_rounded,
+                      size: 25,
+                      color: Color(0xff9E9E9E),
+                    ),
+                  ),
                 ],
               ),
             ),
